@@ -1,10 +1,8 @@
 terraform {
-  required_version = ">= 1.0.0, < 2.0.0"
-
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.0"
+      version = "~> 5"
     }
   }
 }
@@ -17,6 +15,9 @@ resource "aws_instance" "app" {
   instance_type     = "t2.micro"
   availability_zone = "us-east-2a"
   ami               = "ami-0fb653ca2d3203ac1"
+  tags = {
+    Name = "webserver"
+  }
 
   user_data = <<-EOF
               #!/bin/bash
